@@ -12,7 +12,7 @@ import net.mamoe.mirai.BotFactory
 fun main() {
   val configJson: String = FileUtil.getConfigFile().readText()
   val moshi = Moshi.Builder().build()
-  val jsonAdapter = moshi.adapter<Config>()
+  val jsonAdapter = moshi.adapter<Config>()23
   val config = jsonAdapter.fromJson(configJson) ?: return
   for (bot in config.bots) {
     val newBot = BotFactory.newBot(bot.account, bot.password.value) {
