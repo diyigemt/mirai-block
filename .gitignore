@@ -17,6 +17,6 @@ out/
 local.properties
 /.idea
 /target
-data/
-cache
-config
+/data/
+/cache/
+/config/
