@@ -4,15 +4,21 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import net.diyigemt.miraiblock.block.listener.Listener
+import net.diyigemt.miraiblock.block.operator.OperatorBlock
+import net.diyigemt.miraiblock.block.operator.OperatorBlockEqual
 import net.diyigemt.miraiblock.entity.config.Config
 import net.diyigemt.miraiblock.util.FileUtil
 import net.mamoe.mirai.BotFactory
+import net.mamoe.mirai.event.Event
+import net.mamoe.mirai.event.ListeningStatus
+import net.mamoe.mirai.event.events.MessageEvent
 
 @OptIn(ExperimentalStdlibApi::class)
 fun main() {
   val configJson: String = FileUtil.getConfigFile().readText()
   val moshi = Moshi.Builder().build()
-  val jsonAdapter = moshi.adapter<Config>()23
+  val jsonAdapter = moshi.adapter<Config>()
   val config = jsonAdapter.fromJson(configJson) ?: return
   for (bot in config.bots) {
     val newBot = BotFactory.newBot(bot.account, bot.password.value) {
@@ -23,7 +29,12 @@ fun main() {
       if (!bot.configuration.network) this.noNetworkLog()
     }
     runBlocking {
-      launch { newBot.login() }
+      launch {
+        newBot.login()
+        newBot.eventChannel.subscribe<Event> { ListeningStatus.LISTENING }
+      }
     }
+    Listener<MessageEvent>("")
   }
+  println(OperatorBlockEqual("eq").invoke("a", "a"))
 }
