@@ -5,12 +5,15 @@ import net.mamoe.mirai.event.Event
 
 class ControlBlockIF(
   name: String,
-  subType: ControlBlockType? = ControlBlockType.IF
-) : ControlBlock(name, subType = subType) {
-  override fun invoke(event: Event, vararg args: String): Any = when {
-    blocks.size < 2 -> false
+) : ControlBlock<Boolean>(name) {
+  override suspend fun invoke(event: Event): Boolean = when(blocks.size) {
+    in 0..1 -> false
     else -> {
-      blocks[0].invoke(event, *args)
+      if (blocks[0].invoke(event)) {
+        blocks.removeAt(0)
+        blocks.forEach { it.invoke(event) }
+      }
+      true
     }
   }
 }

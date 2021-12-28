@@ -6,17 +6,11 @@ import net.diyigemt.miraiblock.block.BlockType
 import net.mamoe.mirai.event.Event
 import net.mamoe.mirai.event.events.BotEvent
 
-open class BotBlock(
+abstract class BotBlock<E: Any>(
   name: String,
-  type: BlockType? = BlockType.OPERATOR,
+  type: BlockType? = BlockType.BOT,
   version: String? = "",
   description: String? = "",
-  protected var subType: BotBlockType? = BotBlockType.NULL,
-) : Block<BotEvent>(
+) : Block<BotEvent, E>(
   name, type, BlockReturnType.ANY, version, description
 )
-
-enum class BotBlockType {
-  NULL,
-  REPLY
-}

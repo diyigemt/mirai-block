@@ -4,9 +4,8 @@ import net.mamoe.mirai.event.Event
 
 class OperatorBlockEqual(
   name: String,
-  subType: OperatorBlockType? = OperatorBlockType.EQUAL,
-) : OperatorBlock(name, subType = subType) {
-  override fun invoke(event: Event, vararg args: String): Any = when {
+) : OperatorBlock<Boolean>(name) {
+  override suspend fun invoke(event: Event): Boolean = when {
     args.size != 2 -> false
     else -> {
       args[0] == args[1]

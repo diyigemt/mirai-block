@@ -4,19 +4,12 @@ import net.diyigemt.miraiblock.block.Block
 import net.diyigemt.miraiblock.block.BlockReturnType
 import net.diyigemt.miraiblock.block.BlockType
 import net.mamoe.mirai.event.Event
-import net.mamoe.mirai.event.events.BotEvent
 
-open class OperatorBlock(
+abstract class OperatorBlock<E: Any>(
   name: String,
   type: BlockType? = BlockType.OPERATOR,
   version: String? = "",
   description: String? = "",
-  protected var subType: OperatorBlockType? = OperatorBlockType.NULL,
-) : Block<Event>(
+) : Block<Event, E>(
   name, type, BlockReturnType.BOOLEAN, version, description
 )
-
-enum class OperatorBlockType {
-  NULL,
-  EQUAL
-}

@@ -8,19 +8,17 @@ import kotlin.reflect.KClass
 open class ListenerBlock<T: Event>(
   name: String,
   event: String,
-  ) : Block<T>(name) {
+  ) : Block<T, Any>(name) {
   open val event: KClass<out Event> by lazy {
     when (event) {
       "BotEvent" -> BotEvent::class
       else -> Event::class
     }
   }
-  override fun invoke(event: T, vararg args: String): Any = when (blocks.size) {
-    0 -> -1
+  override suspend fun invoke(event: T): Any = when (blocks.size) {
+    0 -> Unit
     else -> {
-      blocks.forEach { it.invoke(event, *args) }
-      0
+      blocks.forEach { it.invoke(event) }
     }
   }
-
 }

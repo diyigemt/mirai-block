@@ -1,7 +1,6 @@
 package net.diyigemt.miraiblock.block
 
 import net.mamoe.mirai.event.Event
-import net.mamoe.mirai.event.events.BotEvent
 
 abstract class Block<T: Event, E: Any>(
   protected var name: String,
@@ -11,14 +10,10 @@ abstract class Block<T: Event, E: Any>(
   protected var description: String? = "",
 ): BlockInvoker<T, E> {
   protected val blocks: MutableList<Block<T, E>> = mutableListOf<Block<T, E>>()
-  fun <U: Block<T, E>> addBlock(b: U) = blocks.add(b)
-  override fun invoke(event: T, vararg args: String): E = when (blocks.size) {
-    0 -> -1
-    else -> {
-      blocks.forEach { it.invoke(event, *args) }
-      0
-    }
-  }
+  var args: MutableList<String> = mutableListOf()
+  fun addBlock(b: Block<T, E>) = blocks.add(b)
+  fun addArg(index: Int, arg: String) = args.add(index, arg)
+  fun addArg(arg: String) = args.add(arg)
 }
 
 enum class BlockType {

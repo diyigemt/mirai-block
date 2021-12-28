@@ -1,15 +1,15 @@
-package net.diyigemt.miraiblock.block.control
+package net.diyigemt.miraiblock.block.message
 
 import net.diyigemt.miraiblock.block.Block
 import net.diyigemt.miraiblock.block.BlockReturnType
 import net.diyigemt.miraiblock.block.BlockType
-import net.mamoe.mirai.event.Event
+import net.mamoe.mirai.event.events.MessageEvent
 
-abstract class ControlBlock<E: Any>(
+abstract class MessageBlock<E: Any>(
   name: String,
-  type: BlockType? = BlockType.CONTROL,
+  type: BlockType? = BlockType.MESSAGE,
   version: String? = "",
   description: String? = "",
-) : Block<Event, E>(
+) : Block<MessageEvent, E>(
   name, type, BlockReturnType.ANY, version, description
 )

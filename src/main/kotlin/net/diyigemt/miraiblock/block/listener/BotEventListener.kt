@@ -4,7 +4,6 @@ import net.mamoe.mirai.event.events.BotEvent
 import net.mamoe.mirai.event.events.MessageEvent
 import kotlin.reflect.KClass
 
-@Suppress("UNCHECKED_CAST")
 class BotEventListener(
   name: String,
   event: String) : ListenerBlock<BotEvent>(name, event) {
