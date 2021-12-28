@@ -4,15 +4,11 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import net.diyigemt.miraiblock.block.listener.Listener
-import net.diyigemt.miraiblock.block.operator.OperatorBlock
-import net.diyigemt.miraiblock.block.operator.OperatorBlockEqual
+import net.diyigemt.miraiblock.block.listener.BotEventListener
 import net.diyigemt.miraiblock.entity.config.Config
 import net.diyigemt.miraiblock.util.FileUtil
 import net.mamoe.mirai.BotFactory
-import net.mamoe.mirai.event.Event
 import net.mamoe.mirai.event.ListeningStatus
-import net.mamoe.mirai.event.events.MessageEvent
 
 @OptIn(ExperimentalStdlibApi::class)
 fun main() {
@@ -31,10 +27,12 @@ fun main() {
     runBlocking {
       launch {
         newBot.login()
-        newBot.eventChannel.subscribe<Event> { ListeningStatus.LISTENING }
+        val botEventListener = BotEventListener("bot-event-listener-1", "MessageEvent")
+        newBot.eventChannel.subscribe(botEventListener.event) {
+          botEventListener.invoke(this)
+          ListeningStatus.LISTENING
+        }
       }
     }
-    Listener<MessageEvent>("")
   }
-  println(OperatorBlockEqual("eq").invoke("a", "a"))
 }
