@@ -7,7 +7,7 @@ import kotlin.reflect.KClass
 @Suppress("UNCHECKED_CAST")
 class BotEventListener(
   name: String,
-  event: String) : ListenerBlock(name, event) {
+  event: String) : ListenerBlock<BotEvent>(name, event) {
   override val event: KClass<out BotEvent> by lazy {
     when (event) {
       "BotEvent" -> BotEvent::class

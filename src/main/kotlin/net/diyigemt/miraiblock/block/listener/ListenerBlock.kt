@@ -5,10 +5,10 @@ import net.mamoe.mirai.event.Event
 import net.mamoe.mirai.event.events.BotEvent
 import kotlin.reflect.KClass
 
-open class ListenerBlock<T>(
+open class ListenerBlock<T: Event>(
   name: String,
   event: String,
-  ) : Block(name) {
+  ) : Block<T>(name) {
   open val event: KClass<out Event> by lazy {
     when (event) {
       "BotEvent" -> BotEvent::class

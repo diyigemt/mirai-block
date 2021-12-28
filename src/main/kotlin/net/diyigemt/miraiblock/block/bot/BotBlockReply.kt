@@ -7,14 +7,11 @@ class BotBlockReply(
   name: String,
   subType: BotBlockType? = BotBlockType.REPLY
 ) : BotBlock(name, subType = subType) {
-  override fun <T : Event> invoke(event: T, vararg args: String) = when(args.size) {
+  override fun invoke(event: BotEvent, vararg args: String): Any = when(args.size) {
     0 -> -1
-    else -> when (event) {
-      is BotEvent -> {
-        val qq = args[0].toLong()
-        event.bot.getFriend(qq)
-      }
-      else -> 1L
+    else -> {
+      val qq = args[0].toLong()
+      event.bot.getFriend(qq) ?: -1
     }
   }
 }

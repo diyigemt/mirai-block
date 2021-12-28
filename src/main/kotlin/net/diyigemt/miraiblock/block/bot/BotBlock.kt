@@ -4,6 +4,7 @@ import net.diyigemt.miraiblock.block.Block
 import net.diyigemt.miraiblock.block.BlockReturnType
 import net.diyigemt.miraiblock.block.BlockType
 import net.mamoe.mirai.event.Event
+import net.mamoe.mirai.event.events.BotEvent
 
 open class BotBlock(
   name: String,
@@ -11,14 +12,9 @@ open class BotBlock(
   version: String? = "",
   description: String? = "",
   protected var subType: BotBlockType? = BotBlockType.NULL,
-) : Block(
+) : Block<BotEvent>(
   name, type, BlockReturnType.ANY, version, description
-) {
-  override fun <T : Event> invoke(event: T, vararg args: String) = when(blocks.size) {
-    0 -> false
-    else -> blocks[0].invoke(event, *args)
-  }
-}
+)
 
 enum class BotBlockType {
   NULL,
