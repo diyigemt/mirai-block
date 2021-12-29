@@ -1,7 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.5.10"
+    kotlin("kapt") version "1.5.10"
     application
 }
 
@@ -14,6 +15,13 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    val miraiVersion = "2.8.0"
+    api("net.mamoe", "mirai-core-api", miraiVersion)     // 编译代码使用
+    runtimeOnly("net.mamoe", "mirai-core", miraiVersion) // 运行时使用
+    // https://mvnrepository.com/artifact/com.squareup.moshi/moshi-kotlin
+    runtimeOnly("com.squareup.moshi:moshi-kotlin:1.12.0")
+    // https://mvnrepository.com/artifact/com.squareup.moshi/moshi-kotlin-codegen
+    runtimeOnly("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
 }
 
 tasks.test {
