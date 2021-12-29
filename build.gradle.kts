@@ -16,8 +16,8 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     val miraiVersion = "2.8.0"
-    api("net.mamoe", "mirai-core-api", miraiVersion)     // 编译代码使用
-    runtimeOnly("net.mamoe", "mirai-core", miraiVersion) // 运行时使用
+    api("net.mamoe", "mirai-core-api", miraiVersion)
+    runtimeOnly("net.mamoe", "mirai-core", miraiVersion)
     // https://mvnrepository.com/artifact/com.squareup.moshi/moshi-kotlin
     api("com.squareup.moshi:moshi-kotlin:1.12.0")
     // https://mvnrepository.com/artifact/com.squareup.moshi/moshi-kotlin-codegen

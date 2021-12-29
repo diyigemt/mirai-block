@@ -19,7 +19,12 @@ text voice image at
 event
 emit listen
 
-一个积木的构成
+<积木> -> <声明列表>
+<声明列表> -> <声明列表> <声明> | <声明>
+<声明> -> <变量声明> | <监听器声明> | <函数声明>
+<变量声明> -> <类型说明符> ID;
+ID -> \w+
+<类型说明符> -> "int" | "void" | "float"
 BuildingBlock {
     name: String
     version: String?
