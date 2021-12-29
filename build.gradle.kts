@@ -19,9 +19,9 @@ dependencies {
     api("net.mamoe", "mirai-core-api", miraiVersion)     // 编译代码使用
     runtimeOnly("net.mamoe", "mirai-core", miraiVersion) // 运行时使用
     // https://mvnrepository.com/artifact/com.squareup.moshi/moshi-kotlin
-    runtimeOnly("com.squareup.moshi:moshi-kotlin:1.12.0")
+    api("com.squareup.moshi:moshi-kotlin:1.12.0")
     // https://mvnrepository.com/artifact/com.squareup.moshi/moshi-kotlin-codegen
-    runtimeOnly("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+    api ("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
 }
 
 tasks.test {
