@@ -22,20 +22,38 @@ emit listen
 <积木> -> <声明列表>
 <声明列表> -> <声明列表> <声明> | <声明>
 <声明> -> <变量声明> | <监听器声明> | <函数声明>
-<变量声明> -> <类型说明符> ID;
-ID -> \w+
-<类型说明符> -> "int" | "void" | "float"
+<监听器声明> -> <语句块声明>
+
+
 BuildingBlock {
     name: String
     version: String?
     dependent: String[]?
     author: String[]?
     description: String[]?
+    functions: SelfFunction[]?
+    variables: Variable[]?
     listener: Listener[]
 }
 Listener {
-    EventType: KClass
-    action: Block[]
+    eventType: KClass
+    variables: Variable[]?
+    sentences: Sentence[]?
+}
+Variable {
+    type: KClass
+    value: T
+}
+SelfFunction {
+    inputs: Expression[]
+    outputs: Any? // ?
+    sentences: Sentence[]?
+}
+Expression : Sentence {
+    ASSIGN, LOGIC
+}
+LogicControl : Sentence {
+    type: IF | WHILE | BREAK | CONTINUE
 }
 Block {
     
