@@ -50,7 +50,7 @@ SelfFunction {
     sentences: Sentence[]?
 }
 Expression : Sentence {
-    ASSIGN, LOGIC
+    ASSIGN, LOGIC, CALL
 }
 LogicControl : Sentence {
     type: IF | WHILE | BREAK | CONTINUE
