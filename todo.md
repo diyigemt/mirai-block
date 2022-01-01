@@ -25,6 +25,49 @@ emit listen
 <监听器声明> -> <语句块声明>
 
 
+Declaration
+Sentence
+Variable(name: String, type: KClass, value: Any): Factor
+Function(name: String, type: KClass, args: Variable[]?, sentenceBlock: SentenceBlock): Declaration
+
+SentenceBlock(dec: Variable[]?, sentences: Sentence[]?)
+
+Expression(): Sentence
+AssignExpression(variable: Variable, expression: Expression): Sentence
+
+LogicExpressionA(
+argA: LogicExpressionA, argB: LogicExpressionB
+): Expression { return argA || argB }
+
+LogicExpressionB(
+argA: LogicExpressionB, argB: SimpleExpression
+): LogicExpressionA { return argA && argB }
+
+SimpleExpression(
+argA: AddOnExpression, argB: AddOnExpression, argC: relationalOperationType
+): LogicExpressionB
+relationalOperationType: "<=" | ">=" | "<" | ">" | "==" | "!="
+AddOnExpression(
+argA: AddOnExpression, argB: TermExpression, addOperator: AddOperatorType
+): SimpleExpression
+AddOperatorType: "+" | "-"
+TermExpression(
+argA: TermExpression, argB: LogicExpressionC, addOperator: MultiOperatorType
+): AddOnExpression
+MultiOperatorType: "*"
+LogicExpressionC(arg: LogicExpressionC): TermExpression { return !arg }
+
+Factor(): LogicExpressionC
+Variable(name: String, type: KClass, value: Any): Factor
+FunctionCall(functionName: String, args: Expression[]?): Factor
+Number(): Factor
+
+LogicControlSentence(): Sentence
+LogicControlIF(arg: Expression[], sentenceBlock: SentenceBlock): LogicControlSentence
+LogicControlWhile(arg: Expression[], sentenceBlock: SentenceBlock): LogicControlSentence
+LogicControlBreak(): LogicControlSentence
+LogicControlReturn(): LogicControlSentence
+
 BuildingBlock {
     name: String
     version: String?
