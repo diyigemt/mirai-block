@@ -25,6 +25,7 @@ emit listen
 <监听器声明> -> <语句块声明>
 
 
+
 Declaration
 Sentence
 Variable(name: String, type: KClass, value: Any): Factor
@@ -33,7 +34,7 @@ Function(name: String, type: KClass, args: Variable[]?, sentenceBlock: SentenceB
 SentenceBlock(dec: Variable[]?, sentences: Sentence[]?)
 
 Expression(): Sentence
-AssignExpression(variable: Variable, expression: Expression): Sentence
+AssignExpression(variable: Variable, expression: Expression): Expression
 
 LogicExpressionA(
 argA: LogicExpressionA, argB: LogicExpressionB
@@ -67,6 +68,8 @@ LogicControlIF(arg: Expression[], sentenceBlock: SentenceBlock): LogicControlSen
 LogicControlWhile(arg: Expression[], sentenceBlock: SentenceBlock): LogicControlSentence
 LogicControlBreak(): LogicControlSentence
 LogicControlReturn(): LogicControlSentence
+
+
 
 BuildingBlock {
     name: String

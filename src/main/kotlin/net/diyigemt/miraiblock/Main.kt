@@ -7,6 +7,7 @@ import kotlinx.coroutines.runBlocking
 import net.diyigemt.miraiblock.entity.config.Config
 import net.diyigemt.miraiblock.util.FileUtil
 import net.mamoe.mirai.BotFactory
+import kotlin.reflect.cast
 
 @OptIn(ExperimentalStdlibApi::class)
 fun main() {
