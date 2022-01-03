@@ -6,7 +6,7 @@ class DeclaredFunction(
   name: String,
   type: String,
   val sentenceBlock: SentenceBlock
-): Block(name), Invokeable {
+): Factor(name), Invokeable {
   private val kType: KClass<*> = when(type) {
     "Int" -> Int::class
     else -> String::class

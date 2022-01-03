@@ -1,5 +1,5 @@
 package net.diyigemt.miraiblock.block
 
-open class Factor(
+abstract class Factor(
   name: String
-): Block(name)
+): Expression(name)

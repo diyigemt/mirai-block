@@ -1,5 +1,5 @@
 package net.diyigemt.miraiblock.block
 
-class SimpleExpression(
+abstract class LogicSentence(
   name: String
-): LogicExpressionB(name)
+): Sentence(name)

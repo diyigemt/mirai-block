@@ -4,7 +4,7 @@ class SentenceBlock(
   name: String,
   val dec: List<Variable>?,
   val sentences: List<Sentence>?
-): Block(name), Invokeable {
+): Sentence(name), Invokeable {
   override fun invoke(vararg args: Variable) {
     if (sentences.isNullOrEmpty()) return
     sentences.forEach {

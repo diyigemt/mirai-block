@@ -35,4 +35,9 @@ class Variable(
       }
     }
   }
+  fun setValue(t: Variable) {
+    setValue(t.getValue())
+  }
+
+  override fun invoke(vararg args: Variable) = throw RuntimeException("$name: 尝试调用变量的invoke函数!")
 }
