@@ -1,11 +1,22 @@
 package net.diyigemt.miraiblock.block
 
+import net.mamoe.mirai.event.Event
+
 class LogicSentenceIF(
   name: String,
-  arg: List<Expression>,
-  sentenceBlock: SentenceBlock
+  private val arg: Expression,
+  private val sentenceBlock: SentenceBlock
 ): LogicSentence(name) {
-  override fun invoke(vararg args: Variable): UInt {
-    TODO("Not yet implemented")
+  override suspend fun <T : Event> invoke(event: T) {
+    val result: Boolean = when(arg) {
+      is AssignExpression -> {
+        arg.invoke(event)
+        arg.variable.getValue() as Boolean
+      }
+      else -> false
+    }
+    if (result) {
+      sentenceBlock.invoke(event)
+    }
   }
 }

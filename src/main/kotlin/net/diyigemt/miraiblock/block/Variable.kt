@@ -1,5 +1,6 @@
 package net.diyigemt.miraiblock.block
 
+import net.mamoe.mirai.event.Event
 import java.lang.Exception
 import kotlin.reflect.KClass
 import kotlin.reflect.cast
@@ -39,5 +40,5 @@ class Variable(
     setValue(t.getValue())
   }
 
-  override fun invoke(vararg args: Variable) = throw RuntimeException("$name: 尝试调用变量的invoke函数!")
+  override suspend fun <T : Event> invoke(event: T): Any = throw RuntimeException("$name: 尝试调用变量的invoke函数!")
 }
